@@ -3,6 +3,10 @@ import type { Movie } from '../../core/entities/movie.entity';
 import * as UseCases from '../../core/use-cases';
 import { movieDBFetcher } from '../../config/adapters/movieDB.adapter';
 
+
+
+let popularPageNumber = 1;
+
 export const useMovies = () => {
   
   const [isLoading, setIsLoading] = useState(true); // true porque apenas se monte se carga el loading, por eso siempre true
@@ -11,9 +15,13 @@ export const useMovies = () => {
   const [topRated, setTopRated] = useState<Movie[]>([]);
   const [upcoming, setUpcoming] = useState<Movie[]>([]);
 
+
   useEffect(() => {
-    initialLoad ();
+    initialLoad();
+  
+  
   }, [])
+  
   
 const initialLoad = async () => {
 
@@ -70,5 +78,17 @@ const initialLoad = async () => {
         popular,
         topRated,
         upcoming,
+
+        //Methods
+        popularNextPage: async () => {
+          popularPageNumber++;
+          const popularMovies = await UseCases.moviesPopularUseCase( movieDBFetcher,{
+            page: popularPageNumber,
+
+          } );
+
+          // actualizamos las nuevas peliculas en el setstate
+          setPopular( prev =>[...prev, ...popularMovies] );
+        }
     }
 }
