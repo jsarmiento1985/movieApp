@@ -11,6 +11,8 @@ export const getMovieByIdUseCase = async (
         try {
             //fetcher llama al servicio
             const movie = await fetcher.get<MovieDBMovie>(`/${ movieId }`);
+
+            const a = await fetcher.post<MovieDBMovie>("/personas");
             // mapeo las variables del servicio a como quiero guardarlas en el mio
             const fullMovie = MovieMapper.fromMovieDBToEntity( movie );
             //return fullMovie que es el mapeo a usar o mostrar

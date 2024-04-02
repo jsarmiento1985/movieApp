@@ -16,6 +16,20 @@ export class AxiosAdapter implements HttpAdapter{
         })
 
     }
+    async post<T>(url: string, options?: Record<string, unknown> | undefined): Promise<T> {
+       
+        try {
+
+            const {data} = await this.axiosInstance.post<T>( url, options );
+
+            return data;
+            
+        } catch (error) {
+
+            throw new Error(`Error fetching get: ${ url}`);
+            
+        }
+    }
 
    async get<T>( url: string, options?: Record< string, unknown > | undefined): Promise<T> {
       
@@ -33,5 +47,7 @@ export class AxiosAdapter implements HttpAdapter{
         }
 
     }
+
+    
     
 }
