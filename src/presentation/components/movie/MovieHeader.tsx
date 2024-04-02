@@ -1,20 +1,24 @@
 import React from 'react'
 import { Image, Pressable, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
-import { FullMovie } from '../../../../core/entities/movie.entity';
+import { FullMovie } from '../../../core/entities/movie.entity';
 import { useNavigation } from '@react-navigation/native';
 
 interface Props {
-    movie: FullMovie;
+     //asi tambien se pueden pasar todo el objeto movie
+    //movie: FullMovie;
 
     //asi tambien se pueden pasar los props, solo lo que necesitamos
-    /* poster: string,
-    originalTitle: string,
-    title: string, */
+     poster: string,
+     originalTitle: string,
+     title: string, 
 
 
 }
+  //asi tambien se pueden pasar todo el objeto movie
+//export const MovieHeader = ({ movie }: Props) => {
 
-export const MovieHeader = ({ movie }: Props) => {
+ //asi tambien se pueden pasar los props, solo lo que necesitamos
+export const MovieHeader = ({ poster, originalTitle, title  }: Props) => {
 
     const { height: screenHeight } = useWindowDimensions();
     const navigation = useNavigation();
@@ -31,15 +35,20 @@ export const MovieHeader = ({ movie }: Props) => {
 
                     <Image
                         style={styles.posterImage}
-                        source={{ uri: movie.poster }}
+                        //source={{ uri: movie.poster }}
+                        source={{ uri: poster }}
                     />
 
                 </View>
 
                 <View style={styles.marginContainer}>
+                    {/* asi tambien se pueden pasar los props como objetos */}
+                    {/* <Text style={styles.subTitle}> {movie.originalTitle}</Text>
+                    <Text style={styles.title}> {movie.title}</Text> */}
 
-                    <Text style={styles.subTitle}> {movie.originalTitle}</Text>
-                    <Text style={styles.title}> {movie.title}</Text>
+                {/* asi tambien se pueden pasar los props, solo lo que necesitamos */}
+                    <Text style={styles.subTitle}> { originalTitle }</Text>
+                    <Text style={styles.title}> { title }</Text>
 
                 </View>
 
